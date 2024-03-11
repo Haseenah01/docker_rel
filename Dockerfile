@@ -37,6 +37,8 @@ RUN mix local.hex --force && \
 
 # set build ENV
 ENV MIX_ENV="prod"
+ENV DATABASE_URL="ecto://postgres:postgres@10.0.9.100/docker_rel_dev"
+ENV SECRET_KEY_BASE="HGF1ekWu4VWXZDLby40lUOJFN2dufDptrfr3C1NwwvZFeWmFYxSvUIFTc9/A/Gt/"
 
 # install mix dependencies
 COPY mix.exs mix.lock ./
@@ -65,7 +67,8 @@ RUN mix compile
 COPY config/runtime.exs config/
 
 COPY rel rel
-RUN PORT=4040 mix release
+RUN mix phx.digest
+RUN mix release
 
 # start a new build stage so that the final image will only contain
 # the compiled release and other runtime necessities
@@ -100,3 +103,4 @@ USER nobody
 # ENTRYPOINT ["/tini", "--"]
 
 CMD ["/app/bin/server"]
+# CMD ["./prod/rel/docker_rel/bin/docker_rel", "start"]
