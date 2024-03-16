@@ -1,6 +1,8 @@
 defmodule DockerRelWeb.Router do
   use DockerRelWeb, :router
 
+  import Phoenix.LiveDashboard.Router
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -19,6 +21,8 @@ defmodule DockerRelWeb.Router do
 
     get "/", PageController, :home
     resources "/users", UserController
+    live_dashboard "/dashboard", metrics: DockerRelWeb.Telemetry
+
   end
 
   # Other scopes may use custom stacks.
@@ -33,12 +37,12 @@ defmodule DockerRelWeb.Router do
     # If your application does not have an admins-only section yet,
     # you can use Plug.BasicAuth to set up some basic authentication
     # as long as you are also using SSL (which you should anyway).
-    import Phoenix.LiveDashboard.Router
+    # import Phoenix.LiveDashboard.Router
 
     scope "/dev" do
       pipe_through :browser
 
-      live_dashboard "/dashboard", metrics: DockerRelWeb.Telemetry
+      # live_dashboard "/dashboard", metrics: DockerRelWeb.Telemetry
       forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
   end
