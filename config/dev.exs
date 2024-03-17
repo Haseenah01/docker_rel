@@ -18,9 +18,8 @@ config :docker_rel, DockerRel.Repo,
 config :docker_rel, DockerRelWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
-  # check_origin: ["localhost", "127.0.0.1"],
   http: [ip: {0, 0, 0, 0}, port: 4040],
-  check_origin: false,
+  check_origin: true,
   code_reloader: true,
   debug_errors: true,
   secret_key_base: "ufYZ2ATBICj6IWjrTHqF/kZBa+qeFGff7R4l8kLfMdMWGPuOLxl1wMs3UmaH6Yt0",
