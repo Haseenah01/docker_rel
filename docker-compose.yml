@@ -1,34 +1,30 @@
-version: '3'
+version: '3.7'
 
 services:
 
-  db:
-    image: postgres:latest
+  postgres:
+    image: postgres:16
+    container_name: vscode_remote_postgres
     restart: always
+    ports:
+     - 15432:5432
     volumes:
-     - 'pgdata:/var/lib/postgresql/data'
-    environment:
-      PGDATA: /var/lib/postgresql/data/pgdata
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+     - ./docker/data/postgres:/var/lib/postgres/data
 
-  phoenix:
+  app:
     build:
       context: .
       dockerfile: Dockerfile
-    image: sami0727/docker_rel:v5
-    environment:
-      DATABASE_URL: ecto://postgres:postgres@10.0.9.100/docker_rel_dev
-      SECRET_KEY_BASE: HGF1ekWu4VWXZDLby40lUOJFN2dufDptrfr3C1NwwvZFeWmFYxSvUIFTc9/A/Gt/
-      PGUSER: postgres
-      PGPASSWORD: postgres
-      PGDATABASE: docker_rel_dev
-      PGPORT: 5432
-      PGHOST: 10.0.9.100
+    container_name: vscode_remote_app
     ports:
-      - 4040:4040
+      - 4050:4050
+    volumes:
+      - .:/workspace
+      - ~/.gitconfig:/root/.gitconfig
+      - ~/.ssh:/root/.ssh
+    command: sleep infinity
     depends_on:
-      - db
+      - postgres
   
-volumes:
-  pgdata:
+# volumes:
+#   pgdata:

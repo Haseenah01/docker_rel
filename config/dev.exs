@@ -3,10 +3,11 @@ import Config
 # Configure your database
 config :docker_rel, DockerRel.Repo,
   username: "postgres",
-  password: "postgres",
-  hostname: "10.0.9.100",
+  password: "123456",
+  hostname: "localhost",
   database: "docker_rel_dev",
-  stacktrace: true,
+  port: 15432,
+  # stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 # For development, we disable any cache and enable
