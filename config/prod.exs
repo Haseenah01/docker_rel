@@ -8,11 +8,11 @@ import Config
 # config :docker_rel, DockerRelWeb.Endpoint, cache_static_manifest: "priv/static/cache_manifest.json"
 config :docker_rel, DockerRelWeb.Endpoint, server: true,
 check_origin: [
-  "http://localhost:4040",
-  "http://127.0.0.1:4040"
+  "http://localhost:4050",
+  "http://127.0.0.1:4050"
 ],
-http: [port: 4040],
-url: [host: "localhost", port: 4040],
+http: [port: 4050],
+url: [host: "localhost", port: 4050],
 cache_static_manifest: "priv/static/cache_manifest.json"
 # Configures Swoosh API Client
 config :swoosh, api_client: Swoosh.ApiClient.Finch, finch_name: DockerRel.Finch

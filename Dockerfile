@@ -36,7 +36,7 @@ RUN mix local.hex --force && \
 ENV MIX_ENV="prod"
 ENV DATABASE_URL="ecto://postgres:postgres@10.0.9.100/docker_rel_dev"
 ENV SECRET_KEY_BASE="HGF1ekWu4VWXZDLby40lUOJFN2dufDptrfr3C1NwwvZFeWmFYxSvUIFTc9/A/Gt/"
-ENV PORT 4040
+ENV PORT 4050
 # install mix dependencies
 COPY mix.exs mix.lock ./
 RUN mix deps.get --only $MIX_ENV
@@ -91,7 +91,7 @@ RUN chown nobody /app
 
 # set runner ENV
 ENV MIX_ENV="prod"
-EXPOSE 4040
+EXPOSE 4050
 
 # Only copy the final release from the build stage
 COPY --from=builder --chown=nobody:root /app/_build/${MIX_ENV}/rel/docker_rel ./
