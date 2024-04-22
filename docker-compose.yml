@@ -9,7 +9,7 @@ services:
     ports:
      - 15432:5432
     volumes:
-     - ./docker/data/postgres:/var/lib/postgres/data
+     - pgdata:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -41,5 +41,6 @@ services:
     depends_on:
       - postgres
   
-# volumes:
-#   pgdata:
+  
+volumes:
+  pgdata:
