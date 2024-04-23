@@ -66,9 +66,13 @@ RUN apt-get update \
   && apt-get clean -y \
   && rm -rf /var/lib/apt/lists/* /tmp/common-setup.sh /tmp/node-setup.sh
 
-RUN su ${USERNAME} -c "mix local.hex --force \
+# RUN su ${USERNAME} -c "mix local.hex --force \
+#   && mix local.rebar --force \
+#   && mix archive.install --force hex phx_new ${PHOENIX_VERSION}"
+
+RUN mix local.hex --force \
   && mix local.rebar --force \
-  && mix archive.install --force hex phx_new ${PHOENIX_VERSION}"
+  && mix archive.install --force hex phx_new ${PHOENIX_VERSION}
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update \
